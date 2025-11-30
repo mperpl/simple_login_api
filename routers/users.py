@@ -9,7 +9,7 @@ from security import CURRENT_USER, hash_password, verify_password
 
 router = APIRouter(
     prefix='/users',
-    tags=['users (to authorise use email not username)']
+    tags=['users (to authorize use email not username)']
 )
 
 @router.get('/', response_model=list[schemas.UserDisplay], status_code=status.HTTP_200_OK)
