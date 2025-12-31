@@ -1,9 +1,18 @@
+from contextlib import asynccontextmanager
+import sys
 from fastapi import FastAPI
 from routers import users, auth
-from database import create_db_tables
+from database.database import create_db_tables, engine
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    is_testing = "pytest" in sys.modules
+    if "pytest" not in sys.modules:
+        await create_db_tables()
+    yield
+    await engine.dispose()
 
-create_db_tables()
+app = FastAPI(lifespan=lifespan)
+
 app.include_router(users.router)
 app.include_router(auth.router)

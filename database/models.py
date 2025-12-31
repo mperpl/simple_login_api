@@ -3,7 +3,7 @@ from datetime import datetime
 import uuid
 from sqlalchemy import DateTime, ForeignKey, Integer, String, Uuid
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from database import Base
+from database.database import Base
 
 class User(Base):
     __tablename__ = 'users'
@@ -12,7 +12,7 @@ class User(Base):
     username: Mapped[str] = mapped_column(String(16), nullable=False)
     email: Mapped[str] = mapped_column(String(254), unique=True, index=True, nullable=False)
     password: Mapped[str] = mapped_column(String(64), nullable=False)
-    token_version: Mapped[Uuid] = mapped_column(Uuid, default=uuid.uuid4())
+    token_version: Mapped[Uuid] = mapped_column(Uuid, default=uuid.uuid4)
 
     refresh_tokens: Mapped[list["RefreshToken"]] = relationship(back_populates="user", cascade="all, delete-orphan")
     
