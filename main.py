@@ -6,7 +6,6 @@ from database.database import create_db_tables, engine
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    is_testing = "pytest" in sys.modules
     if "pytest" not in sys.modules:
         await create_db_tables()
     yield

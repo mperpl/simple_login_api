@@ -84,6 +84,8 @@ async def refresh(data: schemas.RefreshRequest, db: DB_SESSION):
 async def logout(current_user: CURRENT_USER, db: DB_SESSION):
     await db.execute(delete(models.RefreshToken).where(models.RefreshToken.user_id == current_user.id))
     current_user.token_version = uuid.uuid4()
+    db.add(current_user)
+    await db.refresh(current_user)
     await db.commit()
     
     return {"detail": "Successfully logged out"}
