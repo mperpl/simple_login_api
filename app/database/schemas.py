@@ -1,5 +1,4 @@
-from pydantic import BaseModel, ConfigDict, Field
-from pydantic import EmailStr, SecretStr
+from pydantic import BaseModel, ConfigDict, Field, EmailStr, SecretStr
 
 
 class UserRegister(BaseModel):

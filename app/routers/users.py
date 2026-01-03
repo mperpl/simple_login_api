@@ -1,11 +1,11 @@
 import uuid
 from fastapi import APIRouter, HTTPException, Response, status
 from sqlalchemy import select
-from database.database import DB_SESSION
-import database.models as models
-import database.schemas as schemas
-from helpers.get_current_user import CURRENT_USER
-from helpers.credentials import hash_password, verify_password, compare_ids
+from app.database.database import DB_SESSION
+import app.database.models as models
+import app.database.schemas as schemas
+from app.helpers.get_current_user import CURRENT_USER
+from app.helpers.credentials import hash_password, verify_password, compare_ids
 
 router = APIRouter(
     prefix='/users',

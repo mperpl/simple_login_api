@@ -1,0 +1,10 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env  # This automatically injects your .env variables into the container
+    volumes:
+      - ./database:/app/database # Persists your DB if using SQLite
+    restart: always

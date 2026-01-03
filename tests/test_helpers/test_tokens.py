@@ -3,23 +3,24 @@ import uuid
 from fastapi import HTTPException
 import pytest
 import jwt
-from database import models
-from helpers.tokens import create_access_token, get_refresh_token_payload
-from secret import ALGORITHM, SECRET_KEY
+from app.database import models
+from app.helpers.tokens import create_access_token, get_refresh_token_payload
+# from secret import ALGORITHM, SECRET_KEY
+from app.config import settings
 
 
 def test_create_access_token_logic():
     data = {"sub": "1", "version": "v1"}
     access_token = create_access_token(data, is_refresh_token=False)
-    
-    decoded_access = jwt.decode(access_token, SECRET_KEY, algorithms=[ALGORITHM])
+
+    decoded_access = jwt.decode(access_token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
     assert decoded_access["sub"] == "1"
     assert "exp" in decoded_access
     assert "jti" not in decoded_access
 
     refresh_token = create_access_token(data, is_refresh_token=True)
-    decoded_refresh = jwt.decode(refresh_token, SECRET_KEY, algorithms=[ALGORITHM])
-    
+    decoded_refresh = jwt.decode(refresh_token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+
     assert decoded_refresh["sub"] == "1"
     assert "jti" in decoded_refresh
 
@@ -83,7 +84,7 @@ async def test_access_token_expired():
     )
     
     with pytest.raises(jwt.ExpiredSignatureError):
-        jwt.decode(expired_token, SECRET_KEY, algorithms=[ALGORITHM])
+        jwt.decode(expired_token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
 
 @pytest.mark.asyncio
 async def test_get_refresh_token_payload_expired(session):

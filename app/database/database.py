@@ -2,8 +2,10 @@ from typing import Annotated
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import DeclarativeBase
+from app.config import settings
 
-SQLALCHEMY_DATABASE_URL = 'sqlite+aiosqlite:///./database/auth_users.db'
+
+SQLALCHEMY_DATABASE_URL = settings.DB_URL
 engine = create_async_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = async_sessionmaker(expire_on_commit=False, bind=engine, class_=AsyncSession)
 

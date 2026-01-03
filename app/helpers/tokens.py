@@ -2,9 +2,10 @@ from datetime import datetime, timedelta, timezone
 import uuid
 from fastapi import HTTPException, status
 import jwt
-from database.database import DB_SESSION
-import database.models as models
-from secret import ALGORITHM, SECRET_KEY
+from app.database.database import DB_SESSION
+import app.database.models as models
+# from secret import ALGORITHM, SECRET_KEY
+from app.config import settings
 
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 REFRESH_TOKEN_EXPIRE_DAYS = 7
@@ -19,13 +20,13 @@ def create_access_token(data: dict, is_refresh_token: bool = False, access_token
         expire = datetime.now(timezone.utc) + refresh_token_delta_d
         to_encode.update({"exp": expire, 'jti': str(uuid.uuid4())})
         
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     return encoded_jwt
 
 
 async def get_refresh_token_payload(token: str, db: DB_SESSION):
     credentials_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or expired refresh token", headers={"WWW-Authenticate": "Bearer"})
-    try: payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    try: payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
     except jwt.InvalidTokenError: raise credentials_exception
 
     jti = payload.get("jti")

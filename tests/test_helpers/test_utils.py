@@ -1,6 +1,6 @@
 import pytest
 from fastapi import HTTPException
-from helpers.credentials import compare_ids
+from app.helpers.credentials import compare_ids
 
 def test_compare_ids_success():
     assert compare_ids(1, 1) is None

@@ -2,16 +2,17 @@ from typing import Annotated
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 import jwt
-from database import models
-from database.database import DB_SESSION
-from secret import ALGORITHM, SECRET_KEY
+from app.database import models
+from app.database.database import DB_SESSION
+# from secret import ALGORITHM, SECRET_KEY
+from app.config import settings
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)], db: DB_SESSION):
     credentials_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Could not validate credentials", headers={"WWW-Authenticate": "Bearer"})
     
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         id = payload.get("sub")
         token_version = payload.get('version')
         if id is None:

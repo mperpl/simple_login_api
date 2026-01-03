@@ -2,9 +2,10 @@ import uuid
 import pytest
 import jwt
 from fastapi import HTTPException
-from helpers.get_current_user import get_current_user
-from secret import SECRET_KEY, ALGORITHM
-from database import models
+from app.helpers.get_current_user import get_current_user
+# from secret import SECRET_KEY, ALGORITHM
+from app.database import models
+from app.config import settings
 
 @pytest.mark.asyncio
 async def test_get_current_user_valid(session):
@@ -19,7 +20,7 @@ async def test_get_current_user_valid(session):
     await session.refresh(user)
 
     payload = {"sub": str(user.id), "version": str(user.token_version)}
-    token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+    token = jwt.encode(payload, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
     result = await get_current_user(token=token, db=session)
 
@@ -44,7 +45,7 @@ async def test_get_current_user_token_version_mismatch(session):
     session.add(user)
     await session.commit()
 
-    token = jwt.encode({"sub": str(user.id), "version": str(user.token_version)}, SECRET_KEY, algorithm=ALGORITHM)
+    token = jwt.encode({"sub": str(user.id), "version": str(user.token_version)}, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     
     user.token_version = uuid.uuid4()
     await session.commit()

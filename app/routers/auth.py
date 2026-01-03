@@ -5,13 +5,14 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 import jwt
 from sqlalchemy import delete, select
-from database.database import DB_SESSION
-import database.models as models
-import database.schemas as schemas
-from helpers.get_current_user import CURRENT_USER
-from helpers.tokens import create_access_token, get_refresh_token_payload
-from helpers.credentials import verify_password
-from secret import ALGORITHM, SECRET_KEY
+from app.database.database import DB_SESSION
+import app.database.models as models
+import app.database.schemas as schemas
+from app.helpers.get_current_user import CURRENT_USER
+from app.helpers.tokens import create_access_token, get_refresh_token_payload
+from app.helpers.credentials import verify_password
+# from secret import ALGORITHM, SECRET_KEY
+from app.config import settings
 
 router = APIRouter(
     prefix='/auth',
@@ -33,7 +34,7 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: 
     access_token = create_access_token(token_data)
     refresh_token = create_access_token(token_data, is_refresh_token=True)
 
-    refresh_payload = jwt.decode(refresh_token, SECRET_KEY, algorithms=[ALGORITHM])
+    refresh_payload = jwt.decode(refresh_token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
     db.add(models.RefreshToken(
         jti=refresh_payload["jti"],
         user_id=user.id,
@@ -66,7 +67,7 @@ async def refresh(data: schemas.RefreshRequest, db: DB_SESSION):
     access_token = create_access_token(user_data)
     new_refresh_token = create_access_token(user_data, is_refresh_token=True)
 
-    new_payload = jwt.decode(new_refresh_token, SECRET_KEY, algorithms=[ALGORITHM])
+    new_payload = jwt.decode(new_refresh_token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
     new_jti = new_payload["jti"]
     exp_timestamp = new_payload["exp"]
     expires_at = datetime.fromtimestamp(exp_timestamp, tz=timezone.utc)

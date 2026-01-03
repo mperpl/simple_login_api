@@ -1,6 +1,6 @@
 import pytest
 from fastapi import HTTPException
-from helpers.credentials import compare_ids, hash_password, verify_password
+from app.helpers.credentials import compare_ids, hash_password, verify_password
 
 
 def test_hash_password():
