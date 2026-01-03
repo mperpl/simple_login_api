@@ -1,0 +1,26 @@
+[project]
+name = "simpleloginapi"
+version = "0.1.0"
+description = "Practice project"
+readme = "README.md"
+requires-python = ">=3.13"
+
+dependencies = [
+    "fastapi[standard]~=0.128",
+    "uvicorn[standard]~=0.40",
+    "sqlalchemy~=2.0.45",
+    "aiosqlite~=0.22",
+    "pyjwt~=2.10",
+    "pwdlib[argon2]~=0.3",
+    "python-dotenv~=1.2",
+    "pydantic[email]~=2.12",
+]
+
+[dependency-groups]
+dev = [
+    "asgi-lifespan~=2.1",
+    "httpx~=0.28",
+    "pytest~=9.0",
+    "pytest-asyncio~=0.23",
+]
+
