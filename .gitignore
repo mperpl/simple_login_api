@@ -1,0 +1,10 @@
+__pycache__
+auth_users.db
+
+.venv/
+
+uv.lock
+
+.env
+
+.pytest_cache/
