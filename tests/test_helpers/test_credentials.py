@@ -6,10 +6,11 @@ from app.helpers.credentials import compare_ids, hash_password, verify_password
 def test_hash_password():
     password = "my_secure_password"
     hashed = hash_password(password)
-    
+
     assert hashed != password
     assert len(hashed) > 10
     assert verify_password(password, hashed) is True
+
 
 def test_verify_password_correct():
     password = "test_password"
@@ -32,6 +33,6 @@ def test_compare_ids_success():
 def test_compare_ids_forbidden():
     with pytest.raises(HTTPException) as e:
         compare_ids(1, 2)
-    
+
     assert e.value.status_code == 403
     assert e.value.detail == "Not authorized"
