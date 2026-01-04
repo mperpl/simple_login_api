@@ -5,7 +5,6 @@ import pytest
 import jwt
 from app.database import models
 from app.helpers.tokens import create_access_token, get_refresh_token_payload
-# from secret import ALGORITHM, SECRET_KEY
 from app.config import settings
 
 

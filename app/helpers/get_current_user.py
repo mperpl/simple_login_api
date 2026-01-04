@@ -4,7 +4,6 @@ from fastapi.security import OAuth2PasswordBearer
 import jwt
 from app.database import models
 from app.database.database import DB_SESSION
-# from secret import ALGORITHM, SECRET_KEY
 from app.config import settings
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")

@@ -3,7 +3,6 @@ import pytest
 import jwt
 from fastapi import HTTPException
 from app.helpers.get_current_user import get_current_user
-# from secret import SECRET_KEY, ALGORITHM
 from app.database import models
 from app.config import settings
 

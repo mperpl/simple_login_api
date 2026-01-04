@@ -4,7 +4,6 @@ from fastapi import HTTPException, status
 import jwt
 from app.database.database import DB_SESSION
 import app.database.models as models
-# from secret import ALGORITHM, SECRET_KEY
 from app.config import settings
 
 ACCESS_TOKEN_EXPIRE_MINUTES = 30

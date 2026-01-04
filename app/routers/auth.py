@@ -11,7 +11,6 @@ import app.database.schemas as schemas
 from app.helpers.get_current_user import CURRENT_USER
 from app.helpers.tokens import create_access_token, get_refresh_token_payload
 from app.helpers.credentials import verify_password
-# from secret import ALGORITHM, SECRET_KEY
 from app.config import settings
 
 router = APIRouter(
