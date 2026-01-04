@@ -1,17 +1,49 @@
-# simple_login_api
+# SimpleLoginAPI
 
-A minimal/simple REST API providing basic user login and authentication.
+A minimal FastAPI-based REST API showcasing basic user login, JWT authentication (access + refresh tokens), and simple session handling. Intended as a small learning / starter project.
 
-## Description  
-This learning project implements a simple login/authentication API. It can be used as a starting point for applications that require user authentication and session handling, without the overhead of larger frameworks.  
+## Features
+- Email + password login
+- JWT access & refresh tokens
+- Simple user model and DB layer (see app/backend/database)
 
-## Features  
-- User login via API with email/password
-- JWT Token-based authentication (including refresh tokens)
+## Tech
+- Python + FastAPI + SQLAlchemy
+- Docker / docker-compose
+- Tests with pytest
 
-## Technologies  
-List of technologies / languages / libraries used in the project. For example:  
-- Python 3.x (or relevant language)  
-- Framework (e.g. Flask, Express, etc — adjust to actual implementation)  
-- JSON for data exchange  
-- (Optional) Database or storage type — e.g. SQLite / PostgreSQL / in‑memory / flat‑file  
+## Quickstart (recommended: Docker)
+1. Build & run backend:
+   ```sh
+   docker compose up backend
+   ```
+   Backend listens on port 8000.
+
+2. Run the test suite:
+   ```sh
+   docker compose run --rm tester
+   ```
+
+## Run locally
+1. Install UV: https://docs.astral.sh/uv/getting-started/installation/
+2. Install dependencies (adjust if project uses pyproject/requirements):
+   ```sh
+   uv sync
+   ```
+3. Start dev server:
+   ```sh
+   uv run fastapi dev app/backend/main.py
+   ```
+
+## Run tests locally
+  ```sh
+   pytest
+   ```
+
+## UI for the endpoints
+  UI can be found after the project is properly set up and ran. When ready, open up http://localhost:8000/docs#/
+
+## Where to look
+- app/backend/routers — application logic
+- app/backend/database — DB + models
+- app/backend/tests — tests

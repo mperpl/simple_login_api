@@ -5,15 +5,15 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 import jwt
 from sqlalchemy import delete, select
-from app.database.database import DB_SESSION
-import app.database.models as models
-import app.database.schemas as schemas
-from app.helpers.get_current_user import CURRENT_USER
-from app.helpers.tokens import create_access_token, get_refresh_token_payload
-from app.helpers.credentials import verify_password
-from app.config import settings
+from backend.database.database import DB_SESSION
+import backend.database.models as models
+import backend.database.schemas as schemas
+from backend.helpers.get_current_user import CURRENT_USER
+from backend.helpers.tokens import create_access_token, get_refresh_token_payload
+from backend.helpers.credentials import verify_password
+from backend.config import settings
 
-router = APIRouter(prefix="/auth", tags=["auth"])
+router = APIRouter(prefix="/auth", tags=["auth (to authorize use email not username)"])
 
 
 @router.post("/login", response_model=schemas.Tokens, status_code=status.HTTP_200_OK)

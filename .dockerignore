@@ -1,19 +1,11 @@
 .git
 .gitignore
-
+.ruff_cache/
+__pycache__/
+.pytest_cache/
 .python-version
 .venv/
-
-.pytest_cache/
-tests/
-pytest.ini
-
-# Environment and Secrets
-# (Crucial: Don't bake secrets into your image; pass them as runtime variables)
 .env
-secret.py
-
 Dockerfile
 .dockerignore
-
 *.md

@@ -1,14 +1,14 @@
 import uuid
 from fastapi import APIRouter, HTTPException, Response, status
 from sqlalchemy import select
-from app.database.database import DB_SESSION
-import app.database.models as models
-import app.database.schemas as schemas
-from app.helpers.get_current_user import CURRENT_USER
-from app.helpers.credentials import hash_password, verify_password, compare_ids
+from backend.database.database import DB_SESSION
+import backend.database.models as models
+import backend.database.schemas as schemas
+from backend.helpers.get_current_user import CURRENT_USER
+from backend.helpers.credentials import hash_password, verify_password, compare_ids
 
 router = APIRouter(
-    prefix="/users", tags=["users (to authorize use email not username)"]
+    prefix="/users", tags=["users"]
 )
 
 

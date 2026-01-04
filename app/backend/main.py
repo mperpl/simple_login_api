@@ -1,8 +1,8 @@
 from contextlib import asynccontextmanager
 import sys
 from fastapi import FastAPI
-from app.routers import users, auth
-from app.database.database import create_db_tables, engine
+from backend.routers import users, auth
+from backend.database.database import create_db_tables, engine
 
 
 @asynccontextmanager

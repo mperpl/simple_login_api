@@ -2,9 +2,9 @@ import uuid
 import pytest
 import jwt
 from fastapi import HTTPException
-from app.helpers.get_current_user import get_current_user
-from app.database import models
-from app.config import settings
+from backend.helpers.get_current_user import get_current_user
+from backend.database import models
+from backend.config import settings
 
 
 @pytest.mark.asyncio

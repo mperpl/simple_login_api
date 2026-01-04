@@ -1,10 +1,26 @@
 services:
-  api:
-    build: .
+  backend:
+    container_name: simpleloginapi_dev
+    build:
+      context: .
+      dockerfile: app/backend/Dockerfile
+      target: dev
     ports:
       - "8000:8000"
+    volumes:
+      - .:/project
     env_file:
       - .env
+
+  tester:
+    build:
+      context: .
+      dockerfile: app/backend/Dockerfile
+      target: dev
     volumes:
-      - ./database:/app/database
-    restart: always
+      - .:/project
+    env_file:
+      - .env
+    command: uv run pytest --verbose
+    profiles:
+      - test_only

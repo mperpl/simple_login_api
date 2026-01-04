@@ -1,5 +1,6 @@
 __pycache__
 auth_users.db
+.ruff_cache
 
 .venv/
 

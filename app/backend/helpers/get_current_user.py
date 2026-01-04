@@ -2,9 +2,9 @@ from typing import Annotated
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 import jwt
-from app.database import models
-from app.database.database import DB_SESSION
-from app.config import settings
+from backend.database import models
+from backend.database.database import DB_SESSION
+from backend.config import settings
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 

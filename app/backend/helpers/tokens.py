@@ -2,9 +2,9 @@ from datetime import datetime, timedelta, timezone
 import uuid
 from fastapi import HTTPException, status
 import jwt
-from app.database.database import DB_SESSION
-import app.database.models as models
-from app.config import settings
+from backend.database.database import DB_SESSION
+import backend.database.models as models
+from backend.config import settings
 
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 REFRESH_TOKEN_EXPIRE_DAYS = 7

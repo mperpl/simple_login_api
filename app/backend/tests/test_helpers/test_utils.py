@@ -1,6 +1,6 @@
 import pytest
 from fastapi import HTTPException
-from app.helpers.credentials import compare_ids
+from backend.helpers.credentials import compare_ids
 
 
 def test_compare_ids_success():
