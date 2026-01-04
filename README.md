@@ -25,8 +25,8 @@ A minimal FastAPI-based REST API showcasing basic user login, JWT authentication
    ```
 
 ## Run locally
-1. Install UV: https://docs.astral.sh/uv/getting-started/installation/
-2. Install dependencies (adjust if project uses pyproject/requirements):
+1. Install UV (pip install uv): https://docs.astral.sh/uv/getting-started/installation/
+2. Install dependencies:
    ```sh
    uv sync
    ```
@@ -39,6 +39,8 @@ A minimal FastAPI-based REST API showcasing basic user login, JWT authentication
   ```sh
    pytest
    ```
+
+### make sure you are in the virtual enviroment before running commands locally!
 
 ## UI for the endpoints
   UI can be found after the project is properly set up and ran. When ready, open up http://localhost:8000/docs#/
